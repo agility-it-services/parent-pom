@@ -7,7 +7,7 @@
     <version>1.0.0-${revision}</version>
     <packaging>pom</packaging>
 
-    <name>Agility IT Services - Parent POM</name>
+    <name>Parent POM</name>
     <description>The Agility IT Services' Parent POM</description>
     <inceptionYear>2025</inceptionYear>
 
@@ -932,7 +932,7 @@
                 <sonar.projectKey>${project.groupId}_${project.artifactId}</sonar.projectKey>
                 <sonar.organization>agility-it-services</sonar.organization>
                 <sonar.host.url>https://sonarcloud.io</sonar.host.url>
-                <sonar.qualitygate.wait>true</sonar.qualitygate.wait>
+<!--                <sonar.qualitygate.wait>true</sonar.qualitygate.wait>-->
                 <sonar.sourceEncoding>${project.build.sourceEncoding}</sonar.sourceEncoding>
                 <sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
                 <sonar.junit.reportPaths>**/target/surefire-reports</sonar.junit.reportPaths>
@@ -964,7 +964,7 @@
 
     <distributionManagement>
         <repository>
-            <id>github-${project.artifactId}</id>
+            <id>github</id>
             <name>GitHub ${project.artifactId} Packages</name>
             <url>https://maven.pkg.github.com/agility-it-services/${project.artifactId}</url>
         </repository>

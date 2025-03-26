@@ -39,7 +39,7 @@ jobs:
                   distribution: 'liberica'
                   cache: 'maven'
             - name: Sonar Scan
-              run: mvn -B -U -V -ntp verify -Dsonar.login=${{ secrets.SONAR_TOKEN }} -Psonar
+              run: mvn -B -U -V -ntp verify -Dsonar.token=${{ secrets.SONAR_TOKEN }} -Psonar
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_ORGANIZATION_TOKEN }}
 
