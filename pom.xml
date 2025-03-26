@@ -964,7 +964,7 @@
 
     <distributionManagement>
         <repository>
-            <id>github-${project.artifactId}</id>
+            <id>github</id>
             <name>GitHub ${project.artifactId} Packages</name>
             <url>https://maven.pkg.github.com/agility-it-services/${project.artifactId}</url>
         </repository>
