@@ -1,0 +1,61 @@
+name: SNAPSHOT Pipeline
+
+on:
+    push:
+        branches:
+            - '*'
+            - '!main'
+    pull_request:
+        branches:
+            - '*'
+            - '!main'
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
+            - name: Set up JDK
+              uses: actions/setup-java@v4
+              with:
+                  java-version: 21
+                  distribution: 'liberica'
+                  cache: 'maven'
+            - name: Build
+              run: mvn -B -U -V -ntp package
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_ORGANIZATION_TOKEN }}
+
+    sonar:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
+            - name: Set up JDK
+              uses: actions/setup-java@v4
+              with:
+                  java-version: 21
+                  distribution: 'liberica'
+                  cache: 'maven'
+            - name: Sonar Scan
+              run: mvn -B -U -V -ntp verify -Dsonar.login=${{ secrets.SONAR_TOKEN }} -Psonar
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_ORGANIZATION_TOKEN }}
+
+    deploy:
+        runs-on: ubuntu-latest
+        needs: build
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
+            - name: Set up JDK
+              uses: actions/setup-java@v4
+              with:
+                  java-version: 21
+                  distribution: 'liberica'
+                  cache: 'maven'
+            - name: Publish to GitHub Packages
+              run: mvn -B -U -V -ntp -DskipTests deploy
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_ORGANIZATION_TOKEN }}
