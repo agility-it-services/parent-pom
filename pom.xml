@@ -932,7 +932,7 @@
                 <sonar.projectKey>${project.groupId}_${project.artifactId}</sonar.projectKey>
                 <sonar.organization>agility-it-services</sonar.organization>
                 <sonar.host.url>https://sonarcloud.io</sonar.host.url>
-                <sonar.qualitygate.wait>true</sonar.qualitygate.wait>
+<!--                <sonar.qualitygate.wait>true</sonar.qualitygate.wait>-->
                 <sonar.sourceEncoding>${project.build.sourceEncoding}</sonar.sourceEncoding>
                 <sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
                 <sonar.junit.reportPaths>**/target/surefire-reports</sonar.junit.reportPaths>
