@@ -7,7 +7,7 @@
     <version>1.0.0-${revision}</version>
     <packaging>pom</packaging>
 
-    <name>Agility IT Services - Parent POM</name>
+    <name>Parent POM</name>
     <description>The Agility IT Services' Parent POM</description>
     <inceptionYear>2025</inceptionYear>
 
