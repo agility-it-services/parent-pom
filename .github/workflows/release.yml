@@ -73,29 +73,14 @@ jobs:
                   cache: 'maven'
             - name: Prepare Release Asset
               run: mvn -B -U -V -ntp -Drevision=${GITHUB_SHA::7} -DskipTests jar:jar
-            - name: Get artifactId
-              id: get_artifact_id
-              uses: christian-draeger/read-properties@1.0.1
-              with:
-                  path: './target/maven-archiver/pom.properties'
-                  property: 'artifactId'
             - name: Get version
               id: get_version
               uses: christian-draeger/read-properties@1.0.1
               with:
                   path: './target/maven-archiver/pom.properties'
                   property: 'version'
-            - name: Set environment variables
-              env:
-                  ARTIFACT_ID: ${{ steps.get_artifact_id.outputs.value }}
-                  ARTIFACT_VERSION: ${{ steps.get_version.outputs.value }}
-              run: |
-                  echo "ARTIFACT_ID=$ARTIFACT_ID" >> $GITHUB_ENV
-                  echo "ARTIFACT_VERSION=$ARTIFACT_VERSION" >> $GITHUB_ENV
             - name: Create GitHub Release
               env:
                 GH_TOKEN: ${{ github.token }}
-              run: |
-                  echo "GITHUB_SHA = $GITHUB_SHA"
-                  echo "ARTIFACT_VERSION = $ARTIFACT_VERSION"
-                  gh release create "$ARTIFACT_VERSION" --generate-notes
+                ARTIFACT_VERSION: ${{ steps.get_version.outputs.value }}
+              run: gh release create "$ARTIFACT_VERSION" --generate-notes
