@@ -20,24 +20,13 @@ jobs:
       token: ${{ secrets.SONAR_TOKEN }}
 
   deploy:
-    runs-on: ubuntu-latest
+    uses: agility-it-services/pipelines/.github/workflows/deploy-to-package-registry.yml@main
+    secrets:
+      token: ${{ secrets.GITHUB_TOKEN }}
     needs: build
     permissions:
       contents: read
       packages: write
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: Set up JDK
-        uses: actions/setup-java@v4
-        with:
-          java-version: 21
-          distribution: 'liberica'
-          cache: 'maven'
-      - name: Publish to GitHub Packages
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: mvn -B -U -V -ntp -Drevision=${GITHUB_SHA::7} -DskipTests deploy
 
   release:
     runs-on: ubuntu-latest
