@@ -94,3 +94,6 @@ jobs:
                   echo "ARTIFACT_VERSION=$ARTIFACT_VERSION" >> $GITHUB_ENV
             - name: Create Release
               uses: softprops/action-gh-release@v2
+              with:
+                name: 'v${{ env.ARTIFACT_VERSION }}'
+                tag_name: '${{ env.ARTIFACT_VERSION }}'
