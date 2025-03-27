@@ -95,5 +95,4 @@ jobs:
             - name: Create GitHub Release
               env:
                 GH_TOKEN: ${{ github.token }}
-                ARTIFACT_VERSION: ${{ steps.get_version.outputs.value }}
               run: gh release create "$ARTIFACT_VERSION" --generate-notes
