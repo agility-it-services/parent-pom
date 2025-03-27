@@ -86,10 +86,13 @@ jobs:
                   path: './target/maven-archiver/pom.properties'
                   properties: 'version'
             - name: Set environment variables
+              env:
+                  ARTIFACT_ID: ${{ steps.get_artifact_id.outputs.value }}
+                  ARTIFACT_VERSION: ${{ steps.get_version.outputs.value }}
               run: |
-                  echo "ARTIFACT_ID=${{ steps.get_artifact_id.outputs.value }}" >> $GITHUB_ENV
-                  echo "ARTIFACT_VERSION=${{ steps.get_version.outputs.value }}" >> $GITHUB_ENV
+                  echo "ARTIFACT_ID=$ARTIFACT_ID" >> $GITHUB_ENV
+                  echo "ARTIFACT_VERSION=$ARTIFACT_VERSION" >> $GITHUB_ENV
             - name: Create GitHub Release
               env:
                 GH_TOKEN: ${{ github.token }}
-              run: gh release create ${{ env.ARTIFACT_VERSION }} --generate-notes
+              run: gh release create "$ARTIFACT_VERSION" --generate-notes
