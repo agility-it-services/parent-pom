@@ -95,4 +95,7 @@ jobs:
             - name: Create GitHub Release
               env:
                 GH_TOKEN: ${{ github.token }}
-              run: gh release create "$ARTIFACT_VERSION" --generate-notes
+              run: |
+                  echo "GITHUB_SHA = $GITHUB_SHA"
+                  echo "ARTIFACT_VERSION = $ARTIFACT_VERSION"
+                  gh release create "$ARTIFACT_VERSION" --generate-notes
