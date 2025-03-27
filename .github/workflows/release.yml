@@ -21,7 +21,7 @@ jobs:
                   distribution: 'liberica'
                   cache: 'maven'
             - name: Build
-              run: mvn -B -U -V -ntp -Drevision=${GITHUB_SHA::8} package
+              run: mvn -B -U -V -ntp -Drevision=${GITHUB_SHA::7} package
 
     sonar:
         runs-on: ubuntu-latest
@@ -35,7 +35,7 @@ jobs:
                   distribution: 'liberica'
                   cache: 'maven'
             - name: Sonar Scan
-              run: mvn -B -U -V -ntp -Drevision=${GITHUB_SHA::8} verify -Dsonar.token=${{ secrets.SONAR_TOKEN }} -Psonar
+              run: mvn -B -U -V -ntp -Drevision=${GITHUB_SHA::7} verify -Dsonar.token=${{ secrets.SONAR_TOKEN }} -Psonar
 
     deploy:
         runs-on: ubuntu-latest
@@ -53,7 +53,7 @@ jobs:
                   distribution: 'liberica'
                   cache: 'maven'
             - name: Publish to GitHub Packages
-              run: mvn -B -U -V -ntp -Drevision=${GITHUB_SHA::8} -DskipTests deploy
+              run: mvn -B -U -V -ntp -Drevision=${GITHUB_SHA::7} -DskipTests deploy
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -72,7 +72,7 @@ jobs:
                   distribution: 'liberica'
                   cache: 'maven'
             - name: Prepare Release Asset
-              run: mvn -B -U -V -ntp -Drevision=${GITHUB_SHA::8} -DskipTests jar:jar
+              run: mvn -B -U -V -ntp -Drevision=${GITHUB_SHA::7} -DskipTests jar:jar
             - name: Get artifactId
               id: get_artifact_id
               uses: christian-draeger/read-properties@1.1.1
@@ -95,4 +95,4 @@ jobs:
             - name: Create GitHub Release
               env:
                 GH_TOKEN: ${{ github.token }}
-              run: gh release create v${{ env.ARTIFACT_VERSION }} --generate-notes
+              run: gh release create v${ARTIFACT_VERSION} --generate-notes
