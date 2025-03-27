@@ -18,6 +18,7 @@ jobs:
     uses: agility-it-services/pipelines/.github/workflows/build.yml@main
     with:
       maven-command: -Drevision=${GITHUB_SHA::7} -Dsonar.token=${{ secrets.SONAR_TOKEN }} -Psonar verify
+    secrets: inherit
 
   deploy:
     runs-on: ubuntu-latest
