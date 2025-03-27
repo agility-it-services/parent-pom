@@ -75,16 +75,16 @@ jobs:
               run: mvn -B -U -V -ntp -Drevision=${GITHUB_SHA::7} -DskipTests jar:jar
             - name: Get artifactId
               id: get_artifact_id
-              uses: christian-draeger/read-properties@1.1.1
+              uses: christian-draeger/read-properties@1.0.1
               with:
                   path: './target/maven-archiver/pom.properties'
-                  properties: 'artifactId'
+                  property: 'artifactId'
             - name: Get version
               id: get_version
-              uses: christian-draeger/read-properties@1.1.1
+              uses: christian-draeger/read-properties@1.0.1
               with:
                   path: './target/maven-archiver/pom.properties'
-                  properties: 'version'
+                  property: 'version'
             - name: Set environment variables
               env:
                   ARTIFACT_ID: ${{ steps.get_artifact_id.outputs.value }}
