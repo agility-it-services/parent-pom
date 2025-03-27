@@ -6,9 +6,7 @@
 :img-build-status: https://github.com/agility-it-services/parent-pom/actions/workflows/release.yml/badge.svg
 :uri-quality-gateway: https://sonarcloud.io/dashboard?id=agility-it-services_parent-pom
 :img-quality-gateway: https://img.shields.io/sonar/quality_gate/nl.agility-it-services.maven_parent-pom?label=Quality%20Gate&logo=sonarcloud&server=https%3A%2F%2Fsonarcloud.io&sonarVersion=8.2
-:uri-version: https://github.com/agility-it-services/parent-pom/actions
-:img-version: https://img.shields.io/github/v/release/agility-it-services/parent-pom?label=Version&logo=github
-image:{img-build-status}[Build Status Badge,link={uri-build-status}] image:{img-quality-gateway}[Quality Gateway Badge,link={uri-quality-gateway}] image:{img-version}[Version Badge,link={uri-version}]
+image:{img-build-status}[Build Status Badge,link={uri-build-status}] image:{img-quality-gateway}[Quality Gateway Badge,link={uri-quality-gateway}]
 
 == Introduction
 This Maven POM is the root POM for all our Maven projects.
