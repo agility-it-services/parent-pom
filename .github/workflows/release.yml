@@ -24,34 +24,9 @@ jobs:
     secrets:
       token: ${{ secrets.GITHUB_TOKEN }}
     needs: build
-    permissions:
-      contents: read
-      packages: write
 
   release:
-    runs-on: ubuntu-latest
+    uses: agility-it-services/pipelines/.github/workflows/github-release.yml@main
+    secrets:
+      token: ${{ secrets.GITHUB_TOKEN }}
     needs: deploy
-    permissions:
-      contents: write
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: Set up JDK
-        uses: actions/setup-java@v4
-        with:
-          java-version: 21
-          distribution: 'liberica'
-          cache: 'maven'
-      - name: Prepare Release Asset
-        run: mvn -B -U -V -ntp -Drevision=${GITHUB_SHA::7} -DskipTests jar:jar
-      - name: Get version
-        id: get_version
-        uses: christian-draeger/read-properties@1.0.1
-        with:
-          path: './target/maven-archiver/pom.properties'
-          property: 'version'
-      - name: Create GitHub Release
-        env:
-          GH_TOKEN: ${{ github.token }}
-          ARTIFACT_VERSION: ${{ steps.get_version.outputs.value }}
-        run: gh release create "$ARTIFACT_VERSION" --generate-notes
